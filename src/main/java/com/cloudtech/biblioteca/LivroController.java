@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -38,6 +39,11 @@ public class LivroController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public Livro cadastrar(@Valid @RequestBody Livro livro) {
 		return livroService.cadastrar(livro);
+	}
+
+	@PutMapping("/alterar/{id}")
+	public ResponseEntity<Livro> alterar(@PathVariable Long id, @Valid @RequestBody Livro livro) {
+		return ResponseEntity.of(livroService.alterar(id, livro));
 	}
 
 }

@@ -29,4 +29,14 @@ public class LivroService {
 		return livro;
 	}
 
+	public synchronized Optional<Livro> alterar(Long id, Livro dados) {
+		if (!livros.containsKey(id)) {
+			return Optional.empty();
+		}
+		Livro livro = new Livro(id, dados.titulo(), dados.autor(), dados.editora(),
+				dados.ano(), dados.categoria(), dados.status());
+		livros.put(id, livro);
+		return Optional.of(livro);
+	}
+
 }
